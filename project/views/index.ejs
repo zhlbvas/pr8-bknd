@@ -1,0 +1,73 @@
+
+<%- include("partials/head", { title: title }) %>
+<body>
+
+    <%- include("partials/header") %>
+
+    <main class="container">
+        <section class="hero">
+            <p class="subtitle">ПУТЕШЕСТВУЙ ПО СТОЛИЦЕ</p>
+            <h1>Открой для себя Астану</h1>
+            <p>
+                Исследуй интересные места, архитектуру
+                и достопримечательности столицы Казахстана.
+            </p>
+
+            <a href="/add" class="button">
+                + Добавить достопримечательность
+            </a>
+        </section>
+
+        <section class="places-section">
+            <h2>Интересные места</h2>
+
+            <% if (places.length === 0) { %>
+                <p>Пока нет достопримечательностей.</p>
+            <% } else { %>
+
+                <div class="cards">
+                    <% places.forEach(function(place) { %>
+                        <article class="card">
+
+<% if (place.image) { %>
+    <img
+        src="<%= place.image %>"
+        alt="<%= place.title %>"
+        class="card-image"
+        onerror="this.style.display='none'"
+    >
+<% } %>
+
+
+                            <div class="card-content">
+                                <p class="category">
+                                    <%= place.category || "Достопримечательность" %>
+                                </p>
+
+                                <h3><%= place.title %></h3>
+
+                                <p><%= place.description %></p>
+
+                                <p class="time">
+                                    Время посещения:
+                                    <%= place.time || "Не указано" %>
+                                </p>
+
+                                <a
+                                    href="/place/<%= place.id %>"
+                                    class="card-link"
+                                >
+                                    Подробнее →
+                                </a>
+                            </div>
+
+                        </article>
+                    <% }); %>
+                </div>
+
+            <% } %>
+        </section>
+    </main>
+
+</body>
+</html>
